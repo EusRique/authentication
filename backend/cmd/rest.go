@@ -16,8 +16,7 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/EusRique/authentication/application/rest/routes"
 	"github.com/spf13/cobra"
 )
 
@@ -27,13 +26,13 @@ var restCmd = &cobra.Command{
 	Short: "Start rest server",
 	Run: func(cmd *cobra.Command, args []string) {
 		port := cmd.Flag("port").Value.String()
-		fmt.Println(port)
+		routes.Start(port)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(restCmd)
-
+	restCmd.Flags().StringP("port", "p", "3000", "REST Server port")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
