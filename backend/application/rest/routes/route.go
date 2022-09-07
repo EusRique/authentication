@@ -17,7 +17,7 @@ func Start(port string) {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	defaultMiddlewares := []gin.HandlerFunc{}
+	defaultMiddlewares := []gin.HandlerFunc{middleware.Database()}
 
 	version := "v1"
 	api := r.Group(version+"/api", defaultMiddlewares...)
