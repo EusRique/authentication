@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	//"github.com/EusRique/frajola/domain/model"
+	"github.com/EusRique/authentication/domain/model"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -47,7 +47,7 @@ func ConnectDB(env string) *gorm.DB {
 	}
 
 	if os.Getenv("AutoMigrateDb") == "true" {
-		//db.AutoMigrate(&model.Document{})
+		db.AutoMigrate(&model.User{})
 	}
 
 	return db
