@@ -27,10 +27,12 @@ func SHA256Encoder(password string) string {
 }
 
 func NewUser(name, email, password string) (*User, error) {
+	passwordEncoder := SHA256Encoder(password)
+
 	user := User{
 		Name:     name,
 		Email:    email,
-		Password: password,
+		Password: passwordEncoder,
 	}
 
 	return &user, nil
