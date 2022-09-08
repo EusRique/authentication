@@ -2,12 +2,17 @@ package routes
 
 import (
 	rest "github.com/EusRique/authentication/application/rest/handlers"
+	"github.com/EusRique/authentication/application/usecase"
 	"github.com/EusRique/authentication/infrastructure/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func configRoutes(api *gin.RouterGroup) {
+	user := rest.NewUsers(usecase.UserUseCase{})
+
 	api.GET("/", rest.Alive)
+
+	api.POST("/created-user", user.CreateUser)
 }
 
 func Start(port string) {
