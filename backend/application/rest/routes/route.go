@@ -11,7 +11,7 @@ func configRoutes(api *gin.RouterGroup) {
 	user := rest.NewUsers(usecase.UserUseCase{})
 	login := rest.LoginIn(usecase.UserUseCase{})
 
-	api.GET("/", rest.Alive)
+	api.GET("/", middleware.Auth(), rest.Alive)
 
 	api.POST("/new-user", user.CreateUser)
 	api.POST("/login", login.Login)
