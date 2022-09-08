@@ -15,3 +15,13 @@ func UserUseCaseFactory(database *gorm.DB) usecase.UserUseCase {
 
 	return userUseCase
 }
+
+func LoginUseCaseFactory(database *gorm.DB) usecase.LoginUseCase {
+	userRepository := repository.UserRepositoryDb{Db: database}
+
+	loginUserCase := usecase.LoginUseCase{
+		UserRepository: &userRepository,
+	}
+
+	return loginUserCase
+}
