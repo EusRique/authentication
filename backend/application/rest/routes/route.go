@@ -12,7 +12,7 @@ func configRoutes(api *gin.RouterGroup) {
 
 	api.GET("/", rest.Alive)
 
-	api.POST("/created-user", user.CreateUser)
+	api.POST("/new-user", user.CreateUser)
 }
 
 func Start(port string) {

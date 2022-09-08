@@ -14,5 +14,10 @@ func (u *UserUseCase) CreatedUser(name, email, password string) (*model.User, er
 		return nil, err
 	}
 
-	return newUser, err
+	err = u.UserRepository.CreatedUser(newUser)
+	if err != nil {
+		return nil, err
+	}
+
+	return newUser, nil
 }

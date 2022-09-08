@@ -10,7 +10,7 @@ type UserRepositoryInterface interface {
 	CreatedUser(user *User) error
 }
 type User struct {
-	ID       uint   `gorm:"type:bigint;primary_key" json:"id"`
+	ID       uint32 `gorm:"primary_key;auto_increment" json:"id"`
 	Name     string `gorm:"type:varchar(40)" json:"name"`
 	Email    string `gorm:"type:varchar(40)" json:"email"`
 	Password string `gorm:"type:varchar(200)" json:"password"`
