@@ -8,6 +8,7 @@ import (
 
 type UserRepositoryInterface interface {
 	CreatedUser(user *User) error
+	FindUserByEmail(email string) (*User, error)
 }
 type User struct {
 	ID       uint32 `gorm:"primary_key;auto_increment" json:"id"`
