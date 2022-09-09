@@ -30,9 +30,14 @@ func (l *LoginRestService) Login(c *gin.Context) {
 
 	db := c.MustGet("DB").(*gorm.DB)
 	user := factory.LoginUseCaseFactory(db)
-	token, err := user.Login(login.Email, login.Password)
+	token, err, errRequiredField := user.Login(login.Email, login.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
+	}
+
+	if errRequiredField != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": errRequiredField})
 		return
 	}
 

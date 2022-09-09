@@ -30,5 +30,5 @@ func (u *UserUseCase) CreatedUser(name, email, password, passwordConfirmation st
 		return newUser, nil, nil
 	}
 
-	return newUser, nil, errors.New("Já existe um usuário com esse email cadastrado")
+	return newUser, nil, errors.New("já existe um usuário com esse email cadastrado")
 }
