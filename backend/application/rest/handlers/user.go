@@ -30,9 +30,14 @@ func (u *UserRestService) CreateUser(c *gin.Context) {
 
 	db := c.MustGet("DB").(*gorm.DB)
 	userUseCase := factory.UserUseCaseFactory(db)
-	newUser, err := userUseCase.CreatedUser(user.Name, user.Email, user.Password)
+	newUser, errRequiredField, err := userUseCase.CreatedUser(user.Name, user.Email, user.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
+	}
+
+	if errRequiredField != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": errRequiredField})
 		return
 	}
 

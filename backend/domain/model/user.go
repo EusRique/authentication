@@ -21,19 +21,49 @@ type User struct {
 	DeletedAt *time.Time `gorm:"type:timestamp;autoUpdateTime" json:"deleted_at"`
 }
 
+func (user *User) IsValid() []string {
+	var errStrings []string
+
+	if user.Name == "" {
+		errorName := fmt.Errorf("nome é obrigatório")
+		errStrings = append(errStrings, errorName.Error())
+	}
+
+	if user.Email == "" {
+		errorEmail := fmt.Errorf("email é obrigatório")
+		errStrings = append(errStrings, errorEmail.Error())
+	}
+
+	if user.Password == "" {
+		errorPassword := fmt.Errorf("password é obrigatório")
+		errStrings = append(errStrings, errorPassword.Error())
+	}
+
+	if errStrings != nil {
+		return errStrings
+	}
+
+	return nil
+}
+
 func SHA256Encoder(password string) string {
 	passwordEncoder := sha256.Sum256([]byte(password))
 
 	return fmt.Sprintf("%x", passwordEncoder)
 }
 
-func NewUser(name, email, password string) (*User, error) {
+func NewUser(name, email, password string) (*User, []string) {
 	passwordEncoder := SHA256Encoder(password)
 
 	user := User{
 		Name:     name,
 		Email:    email,
 		Password: passwordEncoder,
+	}
+
+	err := user.IsValid()
+	if err != nil {
+		return nil, err
 	}
 
 	return &user, nil
