@@ -34,7 +34,7 @@ func (user *User) IsValid() []string {
 		errorEmail := fmt.Errorf("email é obrigatório")
 		errStrings = append(errStrings, errorEmail.Error())
 	}
-	fmt.Println(user.Password)
+
 	if user.Password == "" {
 		errorPassword := fmt.Errorf("senha é obrigatório")
 		errStrings = append(errStrings, errorPassword.Error())
@@ -43,6 +43,11 @@ func (user *User) IsValid() []string {
 	if user.PasswordConfirmation == "" {
 		errorPasswordConfirmation := fmt.Errorf("confirmação de senha é obrigatório")
 		errStrings = append(errStrings, errorPasswordConfirmation.Error())
+	}
+
+	if user.Password != user.PasswordConfirmation {
+		errorComparePassword := fmt.Errorf("as senhas não conferem")
+		errStrings = append(errStrings, errorComparePassword.Error())
 	}
 
 	if errStrings != nil {
