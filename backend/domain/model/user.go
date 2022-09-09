@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"time"
+
+	"github.com/badoux/checkmail"
 )
 
 type UserRepositoryInterface interface {
@@ -11,19 +13,19 @@ type UserRepositoryInterface interface {
 	FindUserByEmail(email string) (*User, error)
 }
 type User struct {
-	ID                   uint32 `gorm:"primary_key;auto_increment" json:"id"`
-	Name                 string `gorm:"type:varchar(40)" json:"name"`
-	Email                string `gorm:"type:varchar(40)" json:"email"`
-	Password             string `gorm:"type:varchar(200)" json:"password"`
-	PasswordConfirmation string `json:"password_confirmation"`
+	ID       uint32 `gorm:"primary_key;auto_increment" json:"id"`
+	Name     string `gorm:"type:varchar(40)" json:"name"`
+	Email    string `gorm:"type:varchar(40)" json:"email"`
+	Password string `gorm:"type:varchar(200)" json:"password"`
 
 	CreatedAt time.Time  `gorm:"type:timestamp;autoCreateTime;default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt *time.Time `gorm:"type:timestamp;autoUpdateTime" json:"updated_at"`
 	DeletedAt *time.Time `gorm:"type:timestamp;autoUpdateTime" json:"deleted_at"`
 }
 
-func (user *User) IsValid() []string {
+func (user *User) IsValid(passwordConfirmation string) []string {
 	var errStrings []string
+	var err error
 
 	if user.Name == "" {
 		errorName := fmt.Errorf("nome é obrigatório")
@@ -35,17 +37,23 @@ func (user *User) IsValid() []string {
 		errStrings = append(errStrings, errorEmail.Error())
 	}
 
+	if user.Email != "" {
+		if err = checkmail.ValidateFormat(user.Email); err != nil {
+			errorValidateEmail := fmt.Errorf("email com formato invalido")
+			errStrings = append(errStrings, errorValidateEmail.Error())
+		}
+	}
 	if user.Password == "" {
 		errorPassword := fmt.Errorf("senha é obrigatório")
 		errStrings = append(errStrings, errorPassword.Error())
 	}
 
-	if user.PasswordConfirmation == "" {
+	if passwordConfirmation == "" {
 		errorPasswordConfirmation := fmt.Errorf("confirmação de senha é obrigatório")
 		errStrings = append(errStrings, errorPasswordConfirmation.Error())
 	}
 
-	if user.Password != user.PasswordConfirmation {
+	if user.Password != passwordConfirmation {
 		errorComparePassword := fmt.Errorf("as senhas não conferem")
 		errStrings = append(errStrings, errorComparePassword.Error())
 	}
@@ -67,13 +75,12 @@ func NewUser(name, email, password, passwordConfirmation string) (*User, []strin
 	passwordEncoder := SHA256Encoder(password)
 
 	user := User{
-		Name:                 name,
-		Email:                email,
-		Password:             password,
-		PasswordConfirmation: passwordConfirmation,
+		Name:     name,
+		Email:    email,
+		Password: password,
 	}
 
-	err := user.IsValid()
+	err := user.IsValid(passwordConfirmation)
 	if err != nil {
 		return nil, err
 	}

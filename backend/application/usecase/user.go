@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"errors"
+
 	"github.com/EusRique/authentication/domain/model"
 )
 
@@ -14,10 +16,19 @@ func (u *UserUseCase) CreatedUser(name, email, password, passwordConfirmation st
 		return nil, errRequiredField, nil
 	}
 
-	err := u.UserRepository.CreatedUser(newUser)
+	user, err := u.UserRepository.FindUserByEmail(email)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return newUser, nil, nil
+	if user.ID == 0 {
+		err = u.UserRepository.CreatedUser(newUser)
+		if err != nil {
+			return nil, nil, err
+		}
+
+		return newUser, nil, nil
+	}
+
+	return newUser, nil, errors.New("Já existe um usuário com esse email cadastrado")
 }
