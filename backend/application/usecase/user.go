@@ -8,8 +8,8 @@ type UserUseCase struct {
 	UserRepository model.UserRepositoryInterface
 }
 
-func (u *UserUseCase) CreatedUser(name, email, password string) (*model.User, []string, error) {
-	newUser, errRequiredField := model.NewUser(name, email, password)
+func (u *UserUseCase) CreatedUser(name, email, password, passwordConfirmation string) (*model.User, []string, error) {
+	newUser, errRequiredField := model.NewUser(name, email, password, passwordConfirmation)
 	if errRequiredField != nil {
 		return nil, errRequiredField, nil
 	}
