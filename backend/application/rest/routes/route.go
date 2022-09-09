@@ -13,7 +13,7 @@ func configRoutes(api *gin.RouterGroup) {
 
 	api.GET("/", middleware.Auth(), rest.Alive)
 
-	api.POST("/new-user", user.CreateUser)
+	api.POST("/signup", user.CreateUser)
 	api.POST("/login", login.Login)
 }
 
