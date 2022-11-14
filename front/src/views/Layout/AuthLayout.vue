@@ -1,12 +1,14 @@
 <template>
-  <section class="AuthLayout">
-    <div class="AuthLayout__SideBar">
-      AUTH LAYOUT
+  <div class="FlexContainer">
+    <div class="FlexContainer__FlexItem">
+      <div class="FlexContainer__FlexItem__Banner">
+        <img :src="bannerLogin" alt="Banner Login">
+      </div>
     </div>
-    <div>
+    <div class="FlexContainer__FlexItem">
       <router-view />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -15,16 +17,31 @@
 
     components: {},
 
-    data: () => ({})
+    props: {},
+
+    data: () => ({
+      bannerLogin: require('@/assets/images/login_banner.png')
+    })
   }
 </script>
 
 <style lang="scss" scoped>
-.AuthLayout {
+.FlexContainer {
   display: flex;
-  flex-direction: row;
-  &__SideBar {
+  flex-direction: row wrap;
+
+  max-width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  &__FlexItem {
+    display: flex;
+    
     background-color: var(--color-primary-login);
+  
+    &__Banner img {
+      max-width: 100%;
+      height: auto;
+    }
   }
- }
+}
 </style>
