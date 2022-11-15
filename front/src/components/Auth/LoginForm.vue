@@ -36,62 +36,62 @@
 </template>
 
 <script>
-	export default {
-		name: 'LoginForm',
-    
-		components: {},
+export default {
+	name: 'LoginForm',
+	
+	components: {},
 
-    props: {},
+	props: {},
 
-    data: () => ({
-			googleLogin: require('@/assets/images/google-svgrepo-com.svg'),
-			twitterLogin: require('@/assets/images/twitter-svgrepo-com.svg'),
-		})
-	}
-  </script>
+	data: () => ({
+		googleLogin: require('@/assets/images/google-svgrepo-com.svg'),
+		twitterLogin: require('@/assets/images/twitter-svgrepo-com.svg'),
+	})
+}
+</script>
   
-  <style lang="scss" scoped>
-  .Container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+<style lang="scss" scoped>
+.Container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    width: 50vw;
-		height: 100vh;
-		&__LoginTitle h1 {
-			font-size: 40px;
-			margin-bottom: 40px;
-			text-align: center;
+	width: 50vw;
+	height: 100vh;
+	&__LoginTitle h1 {
+		font-size: 40px;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+	&__LoginForm {
+		margin-top: 15px;
+		label {
+			margin-left: 7%;
+			font-size: 18px;
 		}
-		&__LoginForm {
-			margin-top: 15px;
-			label {
-				margin-left: 7%;
-				font-size: 18px;
-			}
-			&__Input input {
-				border-radius: 25px;
-				border: 2px solid #dee3e8;
-				padding: 13px;
-				width: 450px;
-			}
-			&__Button button {
-				background: #3b4859;
-				border-radius: 25px;
-				border: none;
-				padding: 13px;
-				width: 450px;
-				margin-top: 30px;
-				margin-bottom: 30px;
-				color: white;
-				font-weight: bold;
-				font-size: 18px;
-				cursor: pointer;
-			}
-			&__Button:hover button {
-				background-color: #374151;
-			}
+		&__Input input {
+			border-radius: 25px;
+			border: 2px solid #dee3e8;
+			padding: 13px;
+			width: 450px;
 		}
+		&__Button button {
+			background: #3b4859;
+			border-radius: 25px;
+			border: none;
+			padding: 13px;
+			width: 450px;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			color: white;
+			font-weight: bold;
+			font-size: 18px;
+			cursor: pointer;
+		}
+		&__Button:hover button {
+			background-color: #374151;
+		}
+	}
 }
 .social-login {
   display: flex;
