@@ -28,7 +28,9 @@
 				<a href="#"> <img :src="googleLogin" alt="Ícone Google"> </a>
 				<a href="#"> <img :src="twitterLogin" alt="Ícone Google"> </a>
 			</div>
-			<!-- Todo esqueceu sua senha  -->
+			<div class="signup">
+				<p>Não é membro? <router-link class="signup-router-link" to="/signup">Inscreva-se agora!!!</router-link></p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -45,7 +47,7 @@
 			googleLogin: require('@/assets/images/google-svgrepo-com.svg'),
 			twitterLogin: require('@/assets/images/twitter-svgrepo-com.svg'),
 		})
-  }
+	}
   </script>
   
   <style lang="scss" scoped>
@@ -115,8 +117,22 @@
 
 	margin-top: 10px;
 }
-
 .social-login-icons a {
 	margin: 0 23px 0 15px;
+}
+.signup {
+	display: flex;
+	justify-content: center;
+
+	margin-top: 10px;
+	color: #8ac5c7;
+	font-weight: 500;
+}
+.signup-router-link {
+	text-decoration: none;
+	color: #8ac5c7;
+}
+.signup-router-link:hover {
+	color: #43ad9f;
 }
 </style>
