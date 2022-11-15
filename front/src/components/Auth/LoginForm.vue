@@ -24,6 +24,11 @@
 				</form>
 			</section>
 			<div class="social-login">ou faça log in com</div>
+			<div class="social-login-icons">
+				<a href="#"> <img :src="googleLogin" alt="Ícone Google"> </a>
+				<a href="#"> <img :src="twitterLogin" alt="Ícone Google"> </a>
+			</div>
+			<!-- Todo esqueceu sua senha  -->
 		</div>
 	</div>
 </template>
@@ -36,7 +41,10 @@
 
     props: {},
 
-    data: () => ({})
+    data: () => ({
+			googleLogin: require('@/assets/images/google-svgrepo-com.svg'),
+			twitterLogin: require('@/assets/images/twitter-svgrepo-com.svg'),
+		})
   }
   </script>
   
@@ -89,19 +97,26 @@
   text-align: center;
 	color: #7c8b97;
 }
-
 .social-login::before,
 .social-login::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #d6dee4;
 }
-
 .social-login:not(:empty)::before {
   margin-right: 1.15em;
 }
-
 .social-login:not(:empty)::after {
   margin-left: 1.25em;
+}
+.social-login-icons {
+	display: flex;
+	justify-content: center;
+
+	margin-top: 10px;
+}
+
+.social-login-icons a {
+	margin: 0 23px 0 15px;
 }
 </style>
