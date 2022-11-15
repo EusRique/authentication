@@ -28,7 +28,8 @@ router.beforeEach(async (to, from, next) => {
   const isLoggedIn = user ? true : false
 
   const publicPages = [
-    "Login"
+    "Login",
+    "SignUp"
   ]
 
   const authRequired = !publicPages.includes(to.name)

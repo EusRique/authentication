@@ -13,6 +13,15 @@ export default [
         meta: {
           title: "Seja bem-vindo!!!"
         }
+      },
+      {
+        path: "/signup",
+        name: "SignUp",
+        component: () =>
+          import (/* webpackChunkName: "signup" */ "@/views/Auth/SignUp.vue"),
+        meta: {
+          title: "Inscreva-se"
+        }
       }
     ]
   }
