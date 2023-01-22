@@ -11,26 +11,26 @@ type LoginUseCase struct {
 	UserRepository model.UserRepositoryInterface
 }
 
-func (l *LoginUseCase) Login(email, password string) (string, error, []string) {
+func (l *LoginUseCase) Login(email, password string) (*model.User, string, error, []string) {
 	errRequiredField := model.LoginIn(email, password)
 	if errRequiredField != nil {
-		return "", nil, errRequiredField
+		return nil, "", nil, errRequiredField
 	}
 
 	// TODO Talvez buscar o usuário com o email e senha fornecidos
 	user, err := l.UserRepository.FindUserByEmail(email)
 	if err != nil {
-		return "", err, nil
+		return nil, "", err, nil
 	}
 
 	if user.Password != model.SHA256Encoder(password) {
-		return "", errors.New("Invalid credentials"), nil
+		return nil, "", errors.New("Invalid credentials"), nil
 	}
 
 	token, err := auth.NewJwtService().GenerateToken(uint(user.ID))
 	if err != nil {
-		return "", err, nil
+		return nil, "", err, nil
 	}
 
-	return token, nil, nil
+	return user, token, nil, nil
 }
