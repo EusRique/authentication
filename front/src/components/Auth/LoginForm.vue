@@ -5,17 +5,25 @@
 				<h1>Log in</h1>
 			</div>
 			<section>
-				<form action="">
+				<form @submit.prevent="login()">
 					<div class="Container__LoginForm">
 						<label>Login ou email</label>
 						<div class="Container__LoginForm__Input">
-							<input type="text">
+							<input
+								required
+								type="email"
+								v-model="formLogin.email"
+							>
 						</div>
 					</div>
 					<div class="Container__LoginForm">
 						<label>Senha</label>
 						<div class="Container__LoginForm__Input">
-							<input type="password">
+							<input
+								required 
+								type="password"
+								v-model="formLogin.password"
+							>
 						</div>
 					</div>
 					<div class="Container__LoginForm__Button">
@@ -36,6 +44,10 @@
 </template>
 
 <script>
+
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
 	name: 'LoginForm',
 	
@@ -43,13 +55,31 @@ export default {
 
 	props: {},
 
-	data: () => ({
-		googleLogin: require('@/assets/images/google-svgrepo-com.svg'),
-		twitterLogin: require('@/assets/images/twitter-svgrepo-com.svg'),
-	})
+	setup (props) {
+		const googleLogin = require('@/assets/images/google-svgrepo-com.svg')
+		const twitterLogin = require('@/assets/images/twitter-svgrepo-com.svg')
+
+    const store = useStore()
+
+		const formLogin = ref({
+			email: '',
+			password: ''
+		})
+		
+    const login = async () => {
+      await store.dispatch('setLogin', formLogin.value)
+    }
+
+		return {
+			googleLogin,
+			twitterLogin,
+      formLogin,
+      login
+		}
+	}
 }
 </script>
-  
+
 <style lang="scss" scoped>
 .Container {
 	display: flex;
