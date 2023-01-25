@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/EusRique/authentication/domain/model"
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -21,13 +22,17 @@ func NewJwtService() *jwtService {
 }
 
 type Claim struct {
-	Sum uint `json:"sum"`
+	Sum   uint   `json:"sum"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
 	jwt.StandardClaims
 }
 
-func (s *jwtService) GenerateToken(id uint) (string, error) {
+func (s *jwtService) GenerateToken(user *model.User) (string, error) {
 	claim := &Claim{
-		id,
+		uint(user.ID),
+		user.Name,
+		user.Email,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 2).Unix(),
 			Issuer:    s.issure,
