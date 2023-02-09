@@ -43,9 +43,10 @@ export default {
       if (!user) return
 
       const userData = AuthModel.mountUserData(user)
-      commit(types.SET_USER, userData)
+      commit('setUser', userData)
     } catch (error) {
-      
+      console.log('ERROR')
+      console.log(error)
     }
   }
 }  
