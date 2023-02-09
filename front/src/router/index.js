@@ -25,7 +25,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   await store.dispatch('checkAuth')
   const user = store.getters['getUser']
-  const isLoggedIn = user ? true : false
+  const isLoggedIn = Object.keys(user).length === 0 ? false : true
 
   const publicPages = [
     "Login",
