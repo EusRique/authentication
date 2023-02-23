@@ -11,7 +11,7 @@ const config = {
 let _axios = axios.create(config)
 _axios.interceptors.request.use(
   function(config) {
-    const isLoggedIn = store.getters['Auth/getUser'] ? true : false
+    const isLoggedIn = store.getters['getUser'] ? true : false
     if (isLoggedIn) {
       config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     }

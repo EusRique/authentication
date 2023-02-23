@@ -1,6 +1,7 @@
 import auth from '@/api/auth'
 import AuthModel from '../Auth/model'
 import VueJwtDecode from 'vue-jwt-decode'
+import router from '@/router'
 
 export default {
   setLogin: async ({ commit, dispatch }, payload) => {
@@ -8,12 +9,7 @@ export default {
       const data = await auth.login(payload)
       localStorage.setItem('token', data.data.token)
 
-      const userData = await dispatch('decodeToken', data.data.token)
-      
-      const user = AuthModel.mountUserData(userData)
-      
-      commit('setToken', data.data.token)
-      commit('setUser', user)
+      return router.push("/")
 
     } catch (error) {
       console.log('ERROR')
