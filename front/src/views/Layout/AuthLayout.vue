@@ -47,10 +47,16 @@
 /* MAX WIDTH = TELA MENORES QUE ESSA RESOLUÇÃO */
 @media screen and (max-width: 1023px) {
   .FlexContainer {
-    overflow: scroll;
+    overflow: hidden;
   }
   .FlexContainer__FlexItem__Banner img {
     display: none;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .FlexContainer {
+    overflow-y: scroll;
   }
 }
 </style>

@@ -137,7 +137,7 @@ export default {
 
 @media screen and (min-width: 584px) and (max-width: 1023px) {
 	.Container {
-		width: 100vw;
+		width: 98vw;
 	}
 	.Container__SignUp {
 		height: 70vh;
