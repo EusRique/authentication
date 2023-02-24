@@ -67,7 +67,8 @@ export default {
 		})
 		
     const login = async () => {
-      await store.dispatch('setLogin', formLogin.value)
+      const response = await store.dispatch('setLogin', formLogin.value)
+			console.log(response)
     }
 
 		return {

@@ -1,9 +1,10 @@
 <template>
-  <component :is='currentComponent' />
+  <component :is="currentComponent ? 'AuthLayout' : 'DefaultLayout'" />
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import AuthLayout from '@/views/Layout/AuthLayout.vue';
 import DefaultLayout from '@/views/Layout/DefaultLayout.vue';
 export default {
@@ -11,18 +12,18 @@ export default {
 
   components: { AuthLayout, DefaultLayout },
 
-  data: () => ({}),
+  setup (props) {
+    const store = useStore()
+    const user = computed(() => store.getters.getUser)
+  
+    const currentComponent = () => {
+      const isLoggedUser = Object.keys(user.value).length === 0 ? false : true
+      
+      return isLoggedUser
+    }
 
-  computed: {
-    ...mapGetters("User", {
-      user: "getUser"
-    }),
-
-    currentComponent() {
-      if (this.user) {
-        return "DefaultLayout"
-      }
-      return 'AuthLayout'
+    return {
+      currentComponent
     }
   }
 }

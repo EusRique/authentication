@@ -13,7 +13,8 @@ export default {
 
     } catch (error) {
       console.log('ERROR')
-      console.log(error)
+      console.error(error.response.data)
+      return error.response.data
     }
   },
 
