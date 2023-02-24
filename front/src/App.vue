@@ -1,5 +1,5 @@
 <template>
-  <component :is="currentComponent ? 'AuthLayout' : 'DefaultLayout'" />
+  <component :is="currentComponent"/>
 </template>
 
 <script>
@@ -15,15 +15,14 @@ export default {
   setup (props) {
     const store = useStore()
     const user = computed(() => store.getters.getUser)
-  
-    const currentComponent = () => {
-      const isLoggedUser = Object.keys(user.value).length === 0 ? false : true
-      
-      return isLoggedUser
-    }
+
+    const currentComponent = computed(() => {
+      const isLoggedUser = Object.keys(user.value)
+      return isLoggedUser.length ? 'DefaultLayout' : 'AuthLayout'
+    })
 
     return {
-      currentComponent
+      currentComponent,
     }
   }
 }
