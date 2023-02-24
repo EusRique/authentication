@@ -44,4 +44,13 @@
     }
   }
 }
+/* MAX WIDTH = TELA MENORES QUE ESSA RESOLUÇÃO */
+@media screen and (max-width: 1023px) {
+  .FlexContainer {
+    overflow: scroll;
+  }
+  .FlexContainer__FlexItem__Banner img {
+    display: none;
+  }
+}
 </style>

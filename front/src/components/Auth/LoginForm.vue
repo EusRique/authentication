@@ -94,6 +94,7 @@ export default {
 		margin-bottom: 40px;
 		text-align: center;
 	}
+
 	&__LoginForm {
 		margin-top: 15px;
 		label {
@@ -165,5 +166,67 @@ export default {
 }
 .signup-router-link:hover {
 	color: #43ad9f;
+}
+
+@media screen and (max-width: 1023px) {
+	.Container {
+		width: 100vw;
+	}
+	.Container__Login {
+		height: 70vh;
+	}
+	.Container__LoginForm__Input input {
+		width: 280px;
+	}
+	.Container__LoginForm__Button button {
+		width: 280px;
+	}
+}
+
+@media screen and (min-width: 584px) and (max-width: 1023px) {
+	.Container {
+		width: 100vw;
+	}
+	.Container__Login {
+		height: 70vh;
+	}
+	.Container__LoginForm__Input input {
+		width: 450px;
+	}
+	.Container__LoginForm__Button button {
+		width: 450px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.Container {
+		width: 100vw;
+	}
+	.Container__Login {
+		height: 100vh;
+	}
+}
+
+@media screen and (max-width: 280px) {
+	.Container {
+		width: 100vw;
+	}
+	.Container__Login {
+		height: 80vh;
+	}
+	.Container__Login section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.Container__LoginForm__Input input {
+		width: 230px;
+	}
+	.Container__LoginForm__Button button {
+		width: 230px;
+	}
+	.signup {
+		font-size: 14px;
+	}
 }
 </style>

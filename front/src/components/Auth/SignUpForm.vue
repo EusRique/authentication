@@ -112,8 +112,83 @@ export default {
 	text-decoration: none;
 	color: #8ac5c7;
 }
-
 .signup-router-link:hover {
 	color: #43ad9f;
+}
+
+@media screen and (max-width: 1023px) {
+	.Container {
+		width: 100vw;
+	}
+
+	.Container__SignUp {
+		height: 85vh;
+	}
+	.Container__SignUpForm__Input input {
+		width: 280px;
+	}
+	.Container__SignUpTitle h1 {
+		font-size: 30px;
+	}
+	.Container__SignUpForm__Button button {
+		width: 280px;
+	}
+}
+
+@media screen and (min-width: 584px) and (max-width: 1023px) {
+	.Container {
+		width: 100vw;
+	}
+	.Container__SignUp {
+		height: 70vh;
+	}
+	.Container__SignUpForm__Input input {
+		width: 450px;
+	}
+	.Container__SignUpForm__Button button {
+		width: 450px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.Container {
+		width: 100vw;
+		//height: 100vh;
+	}
+	.Container__SignUp {
+		height: 97vh;
+	}
+	.Container__SignUpForm__Input input {
+		width: 280px;
+	}
+	.Container__SignUpTitle h1 {
+		font-size: 25px;
+	}
+	.Container__SignUpForm__Button button {
+		width: 280px;
+	}
+}
+
+@media screen and (max-width: 280px) {
+	.Container {
+		width: 100vw;
+	}
+	.Container__SignUp {
+		height: 80vh;
+	}
+	.Container__SignUp section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.Container__SignUpForm__Input input {
+		width: 230px;
+	}
+	.Container__SignUpForm__Button button {
+		width: 230px;
+	}
+	.signup {
+		font-size: 14px;
+	}
 }
 </style>
