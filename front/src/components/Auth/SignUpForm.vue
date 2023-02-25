@@ -5,29 +5,45 @@
 				<h1>Inscreva-se!!!</h1>
 			</div>
 			<section>
-				<form action="">
+				<form @submit.prevent="save()">
 					<div class="Container__SignUpForm">
 						<label>Nome</label>
 						<div class="Container__SignUpForm__Input">
-							<input type="text">
+							<input
+								required 
+								type="text"
+								v-model="formUser.name"
+							>
 						</div>
 					</div>
 					<div class="Container__SignUpForm">
 						<label>Email</label>
 						<div class="Container__SignUpForm__Input">
-							<input type="email">
+							<input 
+								required
+								type="email"
+								v-model="formUser.email"
+							>
 						</div>
 					</div>
 					<div class="Container__SignUpForm">
 						<label>Senha</label>
 						<div class="Container__SignUpForm__Input">
-							<input type="password">
+							<input 
+								required 
+								type="password"
+								v-model="formUser.password"
+							>
 						</div>
 					</div>
 					<div class="Container__SignUpForm">
 						<label>Confirme a senha</label>
 						<div class="Container__SignUpForm__Input">
-							<input type="password">
+							<input 
+								required 
+								type="password"
+								v-model="formUser.password_confirmation"
+							>
 						</div>
 					</div>
 					<div class="Container__SignUpForm__Button">
@@ -43,6 +59,10 @@
 </template>
 
 <script>
+
+import { ref } from 'vue'
+import { useStore } from 'vuex';
+
 export default {
 	name: 'LoginForm',
 	
@@ -50,10 +70,26 @@ export default {
 
 	props: {},
 
-	data: () => ({
-		googleLogin: require('@/assets/images/google-svgrepo-com.svg'),
-		twitterLogin: require('@/assets/images/twitter-svgrepo-com.svg'),
-	})
+	setup (props) {
+		const store = useStore()
+
+		const formUser = ref({
+			name: '',
+			email: '',
+			password: '',
+			password_confirmation: ''
+		})
+
+		const save = async () => {
+			const response = await store.dispatch('setRegisterUser', formUser.value)
+			console.log(response)
+		}
+
+		return {
+			formUser, 
+			save
+		}
+	}
 }
 </script>
   
