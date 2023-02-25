@@ -62,6 +62,7 @@
 
 import { ref } from 'vue'
 import { useStore } from 'vuex';
+import AuthController from './controllers/AuthController'
 
 export default {
 	name: 'LoginForm',
@@ -74,17 +75,24 @@ export default {
 		const store = useStore()
 
 		const formUser = ref({
-			name: '',
-			email: '',
-			password: '',
-			password_confirmation: ''
+			name: null,
+			email: null,
+			password: null,
+			password_confirmation: null
 		})
 
 		const save = async () => {
 			const response = await store.dispatch('setRegisterUser', formUser.value)
 			console.log(response)
+			clearForm()
 		}
 
+		const clearForm = () => {
+			const payloadForm = {
+				formUser
+			}
+			new AuthController().cleanForm(payloadForm)
+		}
 		return {
 			formUser, 
 			save
