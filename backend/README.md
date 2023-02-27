@@ -43,5 +43,5 @@ Dados de Conexão aba connection:
 
 ## **Abaixo os links para a documentação da API**
 
-1. [Registrar novo usuário](./backend/requirements/new-user.md)
-2. [Listar todos os registros](./backend/requirements/login.md)
+1. [Registrar novo usuário](./requirements/new-user.md)
+2. [Listar todos os registros](./requirements/login.md)
