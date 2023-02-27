@@ -28,33 +28,33 @@ func (user *User) IsValid(passwordConfirmation string) []string {
 	var err error
 
 	if user.Name == "" {
-		errorName := fmt.Errorf("nome é obrigatório")
+		errorName := fmt.Errorf("Nome é obrigatório")
 		errStrings = append(errStrings, errorName.Error())
 	}
 
 	if user.Email == "" {
-		errorEmail := fmt.Errorf("email é obrigatório")
+		errorEmail := fmt.Errorf("Email é obrigatório")
 		errStrings = append(errStrings, errorEmail.Error())
 	}
 
 	if user.Email != "" {
 		if err = checkmail.ValidateFormat(user.Email); err != nil {
-			errorValidateEmail := fmt.Errorf("email com formato invalido")
+			errorValidateEmail := fmt.Errorf("Email com formato invalido")
 			errStrings = append(errStrings, errorValidateEmail.Error())
 		}
 	}
 	if user.Password == "" {
-		errorPassword := fmt.Errorf("senha é obrigatório")
+		errorPassword := fmt.Errorf("Senha é obrigatório")
 		errStrings = append(errStrings, errorPassword.Error())
 	}
 
 	if passwordConfirmation == "" {
-		errorPasswordConfirmation := fmt.Errorf("confirmação de senha é obrigatório")
+		errorPasswordConfirmation := fmt.Errorf("Confirmação de senha é obrigatório")
 		errStrings = append(errStrings, errorPasswordConfirmation.Error())
 	}
 
 	if user.Password != passwordConfirmation {
-		errorComparePassword := fmt.Errorf("as senhas não conferem")
+		errorComparePassword := fmt.Errorf("As senhas não conferem")
 		errStrings = append(errStrings, errorComparePassword.Error())
 	}
 
