@@ -4,4 +4,6 @@
 
 Esse repositório contém todo código de uma aplicação de autenticação com JWT.
 
+No back-end foi utilizado Go e no front-end VueJs 3
+
 As instruções de instalações estão no README.md de cada projeto.
