@@ -2,6 +2,9 @@ import auth from '@/api/auth'
 import AuthModel from '../Auth/model'
 import VueJwtDecode from 'vue-jwt-decode'
 import router from '@/router'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 export default {
   setLogin: async ({ commit, dispatch }, payload) => {
@@ -14,7 +17,14 @@ export default {
     } catch (error) {
       console.log('ERROR')
       console.error(error.response.data)
-      return error.response.data
+      if (Array.isArray(error.response.data.message)) {
+        error.response.data.message.forEach(message => {
+          toast.error(message)
+        });
+      } else {
+        toast.error(error.response.data.message)
+      }
+      return
     }
   },
 

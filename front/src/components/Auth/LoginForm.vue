@@ -10,7 +10,7 @@
 						<label>Login ou email</label>
 						<div class="Container__LoginForm__Input">
 							<input
-								required
+								
 								type="email"
 								v-model="formLogin.email"
 							>
@@ -20,7 +20,7 @@
 						<label>Senha</label>
 						<div class="Container__LoginForm__Input">
 							<input
-								required 
+								 
 								type="password"
 								v-model="formLogin.password"
 							>
