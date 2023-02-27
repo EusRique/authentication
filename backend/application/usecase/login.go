@@ -24,7 +24,7 @@ func (l *LoginUseCase) Login(email, password string) (string, error, []string) {
 	}
 
 	if user.Password != model.SHA256Encoder(password) {
-		return "", errors.New("Invalid credentials"), nil
+		return "", errors.New("Credenciais inválidas"), nil
 	}
 
 	token, err := auth.NewJwtService().GenerateToken(user)

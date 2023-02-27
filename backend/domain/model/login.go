@@ -16,18 +16,18 @@ func (login *Login) IsValid() []string {
 	var err error
 
 	if login.Email == "" {
-		errorEmail := fmt.Errorf("o email é obrigatório")
+		errorEmail := fmt.Errorf("Email é obrigatório")
 		errStrings = append(errStrings, errorEmail.Error())
 	}
 
 	if login.Password == "" {
-		errorPassword := fmt.Errorf("a senha obrigatório")
+		errorPassword := fmt.Errorf("Senha obrigatória")
 		errStrings = append(errStrings, errorPassword.Error())
 	}
 
 	if login.Email != "" {
 		if err = checkmail.ValidateFormat(login.Email); err != nil {
-			errorValidateEmail := fmt.Errorf("email com formato invalido")
+			errorValidateEmail := fmt.Errorf("Email com formato invalido")
 			errStrings = append(errStrings, errorValidateEmail.Error())
 		}
 	}
