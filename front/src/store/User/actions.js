@@ -1,15 +1,26 @@
 import user from '@/api/user'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 export default {
   setRegisterUser: async ({ commit, dispatch }, payload) => {
     try {
-      const data = await user.registerUSer(payload)
+      await user.registerUSer(payload)
+      toast.success('Usuário registrado com sucesso!!!');
+      return
 
-      return data
     } catch (error) {
       console.log('ERROR')
-      console.error(error.response.data)
-      return error.response.data
+      console.error(error)
+      if (Array.isArray(error.response.data.message)) {
+        error.response.data.message.forEach(message => {
+          toast.error(message);
+        });
+      } else {
+        toast.error(error.response.data.message);
+      }
+      return
     }
   }
 }
